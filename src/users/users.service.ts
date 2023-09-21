@@ -4,8 +4,9 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Model, UpdateQuery } from 'mongoose';
+import { Model } from 'mongoose';
 import { User } from './interfaces/user.interface';
+import { async } from 'rxjs';
 @Injectable()
 export class UsersService {
   constructor(
@@ -14,10 +15,22 @@ export class UsersService {
   ) {}
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.userModel.findOne({ username: username }).exec();
+    return this.userModel
+      .findOne({ username: username })
+
+      .exec();
+  }
+  async findOneToken(token:string){
+    return this.userModel.findOne({refreshToken: token});
+  }
+  async getUserById(username: string): Promise<User | undefined> {
+    return await this.userModel
+      .findOne({ username: username })
+      .select('-password -refreshToken')
+      .exec();
   }
   async getAll(): Promise<User[] | undefined> {
-    return this.userModel.find().exec();
+    return this.userModel.find().select('-password -refreshToken').exec();
   }
   async findOneById(id: string): Promise<User | undefined> {
     return this.userModel.findById(id).exec();
@@ -37,7 +50,6 @@ export class UsersService {
     return await createdUser.save();
   }
   async deleteUser(id: string): Promise<User | undefined> {
-    return await this.userModel.findOne({_id:id})
-    // return await this.userModel.findByIdAndDelete({ _id: id });
+    return await this.userModel.findOne({ _id: id });
   }
 }

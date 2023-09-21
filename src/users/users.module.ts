@@ -11,14 +11,7 @@ import { AuthGuard } from 'src/auth/guards/auth.guard';
   providers: [
     UsersService,
     ...userProviders,
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: RolesGuard,
-    // },
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: AuthGuard,
-    // },
+
   ],
   exports: [UsersService],
   imports: [DatabaseModule],

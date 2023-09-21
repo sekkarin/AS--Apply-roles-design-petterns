@@ -36,14 +36,16 @@ $ npm run test:cov
 
 ## Design Pattern
 
-* Singleton Pattern
-  Logging
+- Singleton Pattern
+  Logging mode and Custom Logging each types
+  Call Service
 
-* Decorator Pattern
+- Decorator Pattern
   Guards Protection and Roles
 
-* Middleware Pattern
-  RequireAuth
+- Proxy or Middleware Pattern
+  RequireAuth security
+  Pipeline data validation
 
-* Factory Pattern
-  File media
+- Factory Pattern
+  File media sort file types stored

@@ -12,4 +12,5 @@ export interface User extends Document {
   readonly username: string;
   refreshToken: string;
   readonly isAlive: string;
+  readonly profileUrl: string;
 }

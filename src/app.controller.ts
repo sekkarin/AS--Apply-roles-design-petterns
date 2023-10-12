@@ -9,12 +9,8 @@ interface filePath {
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
   @Get('getFile')
   getFile(@Res() res: Response, @Body() file: filePath) {
-    res.sendFile(path.join(__dirname,"../",file.filePath));
+    res.sendFile(path.join(__dirname, '../', file.filePath));
   }
 }

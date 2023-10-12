@@ -18,6 +18,7 @@ export class AuthService {
   ) {}
   async signIn(username: string, pass: string) {
     const user = await this.usersService.findOne(username);
+
     const isMath = await bcrypt.compare(pass, user.password);
     if (!isMath) {
       throw new UnauthorizedException();
@@ -47,8 +48,7 @@ export class AuthService {
   }
   async signUp(Body: User) {
     const hashPassword = await bcrypt.hash(Body.password, 10);
-    console.log(Body);
-    
+  
     return this.usersService.createUser({
       ...Body,
       password: hashPassword,
